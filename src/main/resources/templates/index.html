@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Sudoku</title>
+</head>
+<body>
+    <p th:text="'Puzzle (size): ' + ${puzzle.size()}">Fallback</p>
+
+    <table>
+        <tbody>
+            <tr th:each="row : ${puzzle}">
+                <td th:each="cell : ${row}" th:text="${cell == 0 ? '' : cell}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
