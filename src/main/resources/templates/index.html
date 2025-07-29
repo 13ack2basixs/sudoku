@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>Sudoku</title>
+  <meta charset="utf-8">
+  <title>Sudoku</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="48x48">
+  <link th:href="@{/styles/main.css}" rel="stylesheet" />
 </head>
 <body>
-    <p th:text="'Puzzle (size): ' + ${puzzle.size()}">Fallback</p>
-
+  <div class="sudoku-container">
     <table>
-        <tbody>
-            <tr th:each="row : ${puzzle}">
-                <td th:each="cell : ${row}" th:text="${cell == 0 ? '' : cell}"></td>
-            </tr>
-        </tbody>
+      <tbody>
+        <tr th:each="row, rowStat : ${puzzle}">
+          <td th:each="cell, colStat : ${row}" 
+              th:text="${cell == 0 ? '' : cell}"
+              style="font-size: 28px;"
+              th:class="'cell ' + 
+              (${rowStat.index} % 3 == 0 ? 'top-border ' : '') + 
+              (${rowStat.index} % 3 == 2 ? 'bottom-border ' : '') + 
+              (${colStat.index} % 3 == 0 ? 'left-border ' : '') +
+              (${colStat.index} % 3 == 2 ? 'right-border ' : '')"
+          >
+          </td>
+        </tr>
+      </tbody>
     </table>
+  </div>
+    
 </body>
 </html>
