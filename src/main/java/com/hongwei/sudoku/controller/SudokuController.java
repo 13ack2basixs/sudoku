@@ -3,6 +3,7 @@ package com.hongwei.sudoku.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hongwei.sudoku.model.Sudoku;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,11 +23,12 @@ public class SudokuController {
 
     @GetMapping("/")
     public String index(Model model) {
-        int[][] puzzleArr = service.getSamplePuzzle();
+        Sudoku puzzleArr = service.getSamplePuzzle();
 
         List<List<Integer>> puzzle = new ArrayList<>();
-        for (int[] row : puzzleArr) {
+        for (int i = 0; i < 9; i++) {
             List<Integer> rowList = new ArrayList<>();
+            int[] row = puzzleArr.getRow(i);
             for (int cell : row) {
                 rowList.add(cell);
             }
