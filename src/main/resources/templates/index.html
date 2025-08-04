@@ -12,7 +12,16 @@
       <table style="table-layout: fixed; border-collapse: collapse;">
         <tbody>
           <tr th:each="row, rowStat : ${puzzle}">
-            <td th:each="cell, colStat : ${row}" class="cell">
+            <td
+              th:each="cell, colStat : ${row}"
+              class="cell"
+              th:classappend="|
+                ${(rowStat.index % 3 == 0) ? 'top-border ' : ''}
+                ${(rowStat.index % 3 == 2) ? 'bottom-border ' : ''}
+                ${(colStat.index % 3 == 0) ? 'left-border ' : ''}
+                ${(colStat.index % 3 == 2) ? 'right-border ' : ''}
+              |"
+            >
               <input
                 type="text"
                 maxlength="1"

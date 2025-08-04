@@ -27,7 +27,6 @@ html, body {
 
 .sudoku-container td {
     aspect-ratio: 1 / 1; /* height = width */
-    border: 1px solid black;
     padding: 5px;
     text-align: center;
 }
