@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <title>Sudoku</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="48x48">
-    <link th:href="@{/styles/main.css}" rel="stylesheet" />
+  <meta charset="utf-8">
+  <title>Sudoku</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="48x48">
+  <link th:href="@{/styles/main.css}" rel="stylesheet" />
 </head>
 <body>
-<h1 class="title">Welcome! Challenge yourself a game of Sudoku!</h1>
+  <h1 class="title">Welcome! Challenge yourself a game of Sudoku!</h1>
     <div class="sudoku-container">
-        <table>
-          <tbody>
-            <tr th:each="row, rowStat : ${puzzle}">
-              <td th:each="cell, colStat : ${row}"
-                  th:text="${cell == 0 ? '' : cell}"
-                  class="cell"
-                  th:classappend="|
-                      ${(rowStat.index % 3 == 0) ? 'top-border ' : ''}
-                      ${(rowStat.index % 3 == 2) ? 'bottom-border ' : ''}
-                      ${(colStat.index % 3 == 0) ? 'left-border ' : ''}
-                      ${(colStat.index % 3 == 2) ? 'right-border ' : ''}
-                      ${!(rowStat.index / 3 == 0 and colStat.index / 3 == 2) ? 'bg-gray' : ''}
-                    |"
-              >
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <table style="table-layout: fixed; border-collapse: collapse;">
+        <tbody>
+          <tr th:each="row, rowStat : ${puzzle}">
+            <td th:each="cell, colStat : ${row}" class="cell">
+              <input
+                type="text"
+                maxlength="1"
+                pattern="[1-9]*"
+                class="sudoku-input"
+                th:value="${cell == 0 ? '' : cell}"
+                th:readonly="${cell != 0}"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="new-puzzle-container">
+      <button class="new-puzzle" type="button">New Puzzle</button>
     </div>
 </body>
 </html>
